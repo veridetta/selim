@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Absensis;
 use App\Models\Cutis;
-use App\Models\Informasis;
 use App\Models\Lamarans;
 use App\Models\Mundurs;
 use App\Models\Pelanggarans;
@@ -21,14 +20,17 @@ class AdminController extends Controller
     $pageConfigs = ['showMenu' => true,'mainLayoutType'=>'','navbarColor'=>'bg-light-danger'];
     $breadcrumbs = [ ['link' => "javascript:void(0)", 'name' => "Admin"], ['name' => "Beranda"]];
 
-    $data=Informasis::get();
+    $data="";
     $val = array('primary','secondary','warning','danger','info');
+    
     return view('layouts/admin/dashboard', ['val'=>$val,'data'=>$data,'pageConfigs' => $pageConfigs, 'breadcrumbs' => $breadcrumbs]);
   }
   public function pelamar()
   {
     $pageConfigs = ['showMenu' => true,'mainLayoutType'=>'vertical'];
     $breadcrumbs = [ ['link' => "javascript:void(0)", 'name' => auth()->user()->role], ['name' => "Pelamar"]];
+
+
     $val = array('primary','secondary','warning','danger','info');
     return view('layouts/admin/pelamar', ['val'=>$val,'pageConfigs' => $pageConfigs, 'breadcrumbs' => $breadcrumbs]);
   }
@@ -245,7 +247,10 @@ class AdminController extends Controller
   {
     $pageConfigs = ['showMenu' => true,'mainLayoutType'=>'vertical'];
     $breadcrumbs = [ ['link' => "javascript:void(0)", 'name' => auth()->user()->role], ['name' => "Pelanggaran"]];
+
     $kar = User::join('lamarans','lamarans.id_users','=','users.id')->where('users.role','=','karyawan')->orderBy('name')->get();
+
+
     $val = array('primary','secondary','warning','danger','info');
     return view('layouts/admin/pelanggaran', ['val'=>$val,'kars'=>$kar,'pageConfigs' => $pageConfigs, 'breadcrumbs' => $breadcrumbs]);
   }

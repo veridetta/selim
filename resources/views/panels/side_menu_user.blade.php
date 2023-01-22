@@ -58,7 +58,7 @@
         <span class="menu-title text-truncate">Pelanggaran</span>
     </a>
 </li>
-@elseif (auth()->user()->role=='adminp' || auth()->user()->role=='pimpinan')
+@elseif (auth()->user()->role=='admin' || auth()->user()->role=='pimpinan')
 <li class="nav-item">
     <a href="{{route('dashboard-admin')}}" class="d-flex align-items-center" target="_self">
         <i data-feather="home"></i>
